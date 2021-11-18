@@ -12,8 +12,6 @@
 Repositorio para almacenar las tareas, talleres, ejercicios, entre otros que se desarrollen a lo largo del curso.
 
 
-
-
 # Content
 
 1. Bibliografía (editada x @juferoga)
