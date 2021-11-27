@@ -1,11 +1,11 @@
 # FUENTES
 
 ## THINKER CAD
-(Circuito en Thinker cad)[https://www.tinkercad.com/things/1kzWwhmDQYf]
+[Circuito en Thinker cad](https://www.tinkercad.com/things/1kzWwhmDQYf)
 
 ### LogicSim
 
-Simulador (LogicSim)[http://weblidi.info.unlp.edu.ar/catedras/organiza/circuitos/editor_simple.html]
+Simulador [LogicSim](http://weblidi.info.unlp.edu.ar/catedras/organiza/circuitos/editor_simple.html)
 
 ## COMPLETO
 ``
