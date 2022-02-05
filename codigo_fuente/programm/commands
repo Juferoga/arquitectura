@@ -1,0 +1,6 @@
+# compilar
+g++ arch.c -o arc_salida
+# ejecutar
+./arch_salida
+# Mostrar lo que se ejecuta
+objdump -S ejecutable
