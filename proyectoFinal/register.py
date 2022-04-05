@@ -61,7 +61,16 @@ class Memory:
  
     def __len__ (self):
         return len(self.byte)
- 
+
+
+
+programConter = Register(0000)
+
+
+memoryRam = Memory()
+
+
+
 if __name__ == "__main__":
     # 1000 bytes memory
     memory = Memory(1000) 
