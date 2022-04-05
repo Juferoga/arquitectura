@@ -8,7 +8,7 @@ class Ui(QtWidgets.QMainWindow):
         self.show() # Show the GUI
 
         self.button = self.findChild(QtWidgets.QPushButton, 'pushButton') # Find the button
-        self.button.clicked.connect(self.printButtonPressed) # Remember to pass the definition/method, not the return value!
+        self.button.clicked.connect(self.pushButton_Pressed) # Remember to pass the definition/method, not the return value!
 
         self.show()
 
