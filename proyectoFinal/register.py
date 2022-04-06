@@ -5,8 +5,11 @@ from pickletools import opcodes
 from posixpath import split
 import struct
 import time
+from typing_extensions import LiteralString
+from PyQt5 import QtWidgets, uic
+import sys
 
-
+# Lógica
 class Register:
     class Wrapper: 
         def __init__ (self, buffer, format_str):
@@ -152,129 +155,240 @@ hlt = False
 # Memoria de acceso aleatorio (RAM, random-access memory)
 #tam 16×8 (16 posiciones de 8 bits cada una)
 
-memoryRam = Memory = []
+
+MemoryRam = Memory = []
+lineCont = 0
 
 
-def instrucion(opcode, register):
-    stack = [] 
-    if opcode == '0':
-        print('No operación')
-    elif opcode == '1':
-        print('Mueve')
-    elif opcode == '2':
-        print('Incrementa B')
-        return registerB+1 
-    elif opcode == '3':
-        print('Incrementa A')
-        return registerA+1 
-    elif opcode == '4':
-        print('Suma')
-        return registerB+registerA
-    elif opcode == '5':
-        print('suma + incremento')
-        return registerB+registerA+1
-    elif opcode == '6':
-        print('Substracción')
-        return registerB-registerA
-    elif opcode == '7':
-        print('Operación lógica NO')
-        def inversa(a):
-            if a == 0:
-                return 1
-            else:
-                return 0
-        registertemp = str(registerB)
-        mapObject = map(int,registertemp)
-        separate = list(mapObject)
-        registerB = map(inversa,separate)
-        return registerB 
-    elif opcode == '8':
-        print('PUSH')
-        stack.append(register)
-    elif opcode == '9':
-        print('POP')
+# Vista
+cont = ()
+btn_times_preseed =0 
+is_pressed = False
+class Ui(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(Ui, self).__init__()
+        uic.loadUi('basic.ui', self)
+        self.show()
+
+        self.btn_reset.clicked.connect(self.resetCPU)
+        self.btn_play.clicked.connect(self.startCPU)
+        self.btn_debug.clicked.connect(self.startDebug)
+        self.btn_load.clicked.connect(self.uploadFile)
+        
+        color="gray"
+        self.lbl_status.setText("<font color="+color+">■</font>")
+
+
+        #self.btn_test.clicked.connect()
+
+    def resetCPU(self):
+        programConter=0x0
+        registerMar=0x0
+        registerIR=0x0
+        registerOut=0x0
+        registerStatus=0x0
+        registerA=0x0
+        registerB=0x0
+    
+    def startCPU(self):
+        reloj(1,len(cont))
+    
+    def startDebug(self):
+        if is_pressed == False:
+            reloj(2,len(cont))
+        else:
+            btn_times_preseed = btn_times_preseed+1
+    
+    def uploadFile(self):
         try:
-            return stack.pop()
-        except IndexError:
-            raise ValueError("La pila está vacía")
-    elif opcode == '10':
-        print('JUMP')
-        return #registerA+1 // binario
-    elif opcode == '11':
-        print('JUMP ZERO')
-        return #registerB suma posicion
-    elif opcode == '12':
-        print('JUMP CARRIE')
-    elif opcode == '13':
-        print('JUMP OVER FLOW')
-        
-    elif opcode == '14':
-        print('JUMP N')
-        
-    elif opcode == '15':
-        print('BREAK')
-        
-    elif opcode == '16':
-        print('HALT')
-        #con intefaz grafica            
-    elif opcode == '17':
-        print('AND')
-        def logicAnd(a,b):
-            if a == b:
-                return 1
-            else:
-                return 0
-                    
-
-        registertempB = str(registerB)
-        registertempA = str(registerA)
-        mapObjectB = map(int,registertempB)
-        mapObjectA = map(int,registertempA)
-        separateB = list(mapObjectB)
-        separateA = list(mapObjectA)
-        
-        x = map(logicAnd,separateB,separateA)
-        return x 
+            archivoUrl = self.txt_url.toPlainText()
+            archivo = open(archivoUrl)
+            contenido = archivo.read()
+            cont = contenido.split('\n')
+            print(cont)
+            # Envio a metodo de procesado
+        except:
             
-    elif opcode == '18':
-        print('OR')
-        
-    elif opcode == '19':
-        print('XOR')
-        
-    elif opcode == '20':
-        print('CLEAR')
-        memoryRam.clear()
-    else:
-        print("opcode no inscrito")
+            print("Error al obtener archivo")
     
+    def instrucion(opcode, param1, param2):
+        stack = [] 
+        lineCont = lineCont+1
+        if opcode == '0':
+            print('No operación')
+        elif opcode == '1':
+            print('Mueve')
+            temp
+            if param1 == 'A' or param1 == 'B':
+                registerA == registerB
+            else: 
+                if param2 == registerA:
+                    temp = param2  
+                    registerB = 
+                    
+                else:
+                    con_par = convertir  
+                    registerB = con_par
+                pass
+        elif opcode == '2':
+            print('Incrementa B')
+            return registerB+1 
+        elif opcode == '3':
+            print('Incrementa A')
+            return registerA+1 
+        elif opcode == '4':
+            print('Suma')
+            return registerB+registerA
+        elif opcode == '5':
+            print('suma + incremento')
+            return registerB+registerA+1
+        elif opcode == '6':
+            print('Substracción')
+            return registerB-registerA
+        elif opcode == '7':
+            print('Operación lógica NO')
+            def inversa(a):
+                if a == 0:
+                    return 1
+                else:
+                    return 0
+            registertemp = str(registerB)
+            mapObject = map(int,registertemp)
+            separate = list(mapObject)
+            registerB = map(inversa,separate)
+            return registerB 
+        elif opcode == '8':
+            print('PUSH')
+            stack.append(param2)
+        elif opcode == '9':
+            print('POP')
+            try:
+                return stack.pop()
+            except IndexError:
+                raise ValueError("La pila está vacía")
+        elif opcode == '10':
+            print('JUMP')
+            jumps(param1)
+            return lineCont
+        elif opcode == '11':
+            print('JUMP ZERO')
+            if param2 == 0x0:
+                jumps(param1)
+                return lineCont
+            else:
+                print('No cumple con la condición')
+        elif opcode == '12':
+            print('JUMP CARRIE')
+             
+        elif opcode == '13':
+            print('JUMP OVER FLOW')
+            
+        elif opcode == '14':
+            print('JUMP N')
+            
+        elif opcode == '15':
+            print('BREAK')
+            
+        elif opcode == '16':
+            print('HALT')
+            #con intefaz grafica            
+        elif opcode == '17':
+            print('AND')
+            def logicAnd(a,b):
+                if a == b:
+                    return 1
+                else:
+                    return 0
+                        
 
-def verifica(numBotton, lines):
-    
-    if numBotton  == '0':
-       for x in range(lines):       
-            time.sleep(0.3)
-            #pg.press("Enter")
-    elif numBotton == '1':
-       for x in range(lines):       
-            time.sleep(0.3)
-            #pg.press("Enter")
-    else:
-        return "NA"
-
-
-
-
-
-
-     
+            registertempB = str(registerB)
+            registertempA = str(registerA)
+            mapObjectB = map(int,registertempB)
+            mapObjectA = map(int,registertempA)
+            separateB = list(mapObjectB)
+            separateA = list(mapObjectA)
+            
+            x = map(logicAnd,separateB,separateA)
+            return x 
+                
+        elif opcode == '18':
+            print('OR')
+            def logicOR(a,b):
+                if a == 1 or b == 1:
+                    return 1
+                else:
+                    return 0
+            
+            
+        elif opcode == '19':
+            print('XOR')
+            def logicXOR(a,b):
+                if (a == 1 and b == 0) or (a == 0 and b == 1):
+                    return 1
+                else:
+                    return 0
+            
+        elif opcode == '20':
+            print('CLEAR')
+            MemoryRam.clear()
+        else:
+            print("opcode no inscrito")
         
-       
+
+    def jumps(param1):
+        lineCont = param1
+        print(lineCont)
 
 
-
-
-
+    ## reloj si es debug o correr el programa con un reloj
+    def reloj(numBotton, lines):
+        
+        if numBotton  == '0':
+            for x in range(lines):
+                print(x)       
+                time.sleep(0.3)
+                #pg.press("Enter")
+        elif numBotton == '1':
+            while btn_times_preseed <= lines:       
+                is_pressed=True
+                print(x)
+                is_pressed=False
+        else:
+            return "NA"
     
+    def prueba():
+        # 1000 bytes memory
+        memory = Memory(1000) 
+    
+        # 16x 128 bits SSE registers
+        xmm = []
+        for i in range(16):
+            xmm.append(Register())
+    
+        #test register aliasing    
+        xmm[0].unsigned32[:] = (4, 5, 6, 7) # fill the whole register (4 x 32 bits)
+        temp = xmm[0].float64[:] # copy as float64 (2 x 64 bits)
+        xmm[0].float64[:] = temp # write back
+        print("xmm[0]:", xmm[0].unsigned32) # (4, 5, 6, 7)
+    
+        # memory aliasing
+        memory.unsigned32[100] = 0x882233FF
+        
+        for i in range(-1, 99, 103): #Little endian !
+            print(hex(memory.byte[i]), end=" ")
+        else:
+            print()
+    
+        # register to register
+        xmm[1].unsigned32[:] = xmm[0].unsigned32[:]
+        xmm[1].float64[0] = xmm[0].float32[3]
+    
+        # mem to register
+        xmm[0].unsigned32[0] = memory.unsigned32[100]
+        print(hex(xmm[0].unsigned32[0])) # 0x882233FF
 
 
+def vista() :
+    app = QtWidgets.QApplication(sys.argv)
+    window = Ui()
+    app.exec_()

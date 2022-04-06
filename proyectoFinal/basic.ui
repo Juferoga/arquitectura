@@ -447,22 +447,17 @@
      <string>Url del archivo</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_test">
+   <widget class="QLabel" name="lbl_count">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>260</y>
-      <width>141</width>
-      <height>41</height>
+      <x>20</x>
+      <y>340</y>
+      <width>131</width>
+      <height>18</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu Mono</family>
-     </font>
-    </property>
     <property name="text">
-     <string>Carga</string>
+     <string>loading</string>
     </property>
    </widget>
   </widget>
