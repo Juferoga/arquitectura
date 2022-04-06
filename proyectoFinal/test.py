@@ -7,6 +7,7 @@ class Ui(QtWidgets.QMainWindow):
         uic.loadUi('basic.ui', self)
         self.show()
 
-app = QtWidgets.QApplication(sys.argv)
-window = Ui()
-app.exec_()
+def vista() :
+    app = QtWidgets.QApplication(sys.argv)
+    window = Ui()
+    app.exec_()

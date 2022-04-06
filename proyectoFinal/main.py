@@ -2,6 +2,7 @@ import Register
 import pyqt5_tools
 import pyqt5_plugins
 import Memory
+import test
 
 
 
@@ -9,7 +10,12 @@ import Memory
 
 if __name__ == "__main__":
     main()
+    window = test
 
+    app = QtWidgets.QApplication(sys.argv)
+    window = Ui()
+    app.exec_()
+    """
     # 1000 bytes memory
     memory = Memory(1000) 
  
@@ -38,4 +44,5 @@ if __name__ == "__main__":
     # mem to register
     xmm[0].unsigned32[0] = memory.unsigned32[100]
     print(hex(xmm[0].unsigned32[0])) # 0x882233FF
+    """
 

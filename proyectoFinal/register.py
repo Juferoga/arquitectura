@@ -1,3 +1,6 @@
+from atexit import register
+import opcode
+from pickletools import opcodes
 import struct
 
 class Register:
@@ -62,13 +65,97 @@ class Memory:
     def __len__ (self):
         return len(self.byte)
 
+class cpu:
+    # Dic opCode
+    #hexadecimal
+    opCode = {
+        'NOP' : 0x0,
+        'MOV' : 0x1,
+        'INCB': 0x2,
+        'INCA': 0x3,
+        'SUM' : 0x4,
+        'SIM' : 0x5,
+        'SUB' : 0x6,
+        'NOT' : 0x7,
+        'PUSH': 0x8,
+        'POP' : 0x9,
+        'JMP' : 0xa,
+        'JZ'  : 0xb,
+        'JC'  : 0xc,
+        'JOF' : 0xd,
+        'JN'  : 0xe,
+        'BRK' : 0xf,
+        'HLT' : 0x10,
+        'AND' : 0x11,
+        'OR'  : 0x12,
+        'XOR' : 0x13,
+        'CLR' : 0x14 
+    }
+
+    def __init__(self,  ):
+        pass
+    
+    def instrucion(opcode):
+        switcher = {
+        1: ,
+        2: ,
+        3: ,
+        4: ,
+        5: ,
+        6: ,
+        7: ,
+        8: ,
+        9: ,
+        10: ,
+        11: ,
+        12: ,
+        13: ,
+        14: ,
+        15:,
+        16:,
+        17:,
+        18:,
+        19:,
+        20:
+
+    }
+        
 
 
-programConter = Register(0000)
 
 
-memoryRam = Memory()
 
+      }  
+        
+       
+
+
+# Registros 
+# Contador de programa (PC, program counter).
+# Registro de entrada y de dirección de memoria (input and MAR, input and memory address register).
+# Registro de instrucción (IR, instruction register).
+
+proConter = Register()
+registerMar = Register()
+registerIR = Register()
+
+registerOut = Register()
+registerStatus = Register()
+registerA = Register()
+registerB = Register()
+
+# Memorias
+# Memoria de acceso aleatorio (RAM, random-access memory)
+#tam 16×8 (16 posiciones de 8 bits cada una)
+
+MemoryRam = Memory(8) 
+
+
+MemoryRam = []
+
+
+def ALU():
+    
 
 
 if __name__ == "__main__":
@@ -88,7 +175,8 @@ if __name__ == "__main__":
  
     # memory aliasing
     memory.unsigned32[100] = 0x882233FF
-    for i in range(103, 99, -1): #Little endian !
+    
+    for i in range(103, 1, 99): #Little endian !
         print(hex(memory.byte[i]), end=" ")
     else:
         print()
