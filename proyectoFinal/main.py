@@ -15,6 +15,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     window = Ui()
     app.exec_()
+    
     """
     # 1000 bytes memory
     memory = Memory(1000) 

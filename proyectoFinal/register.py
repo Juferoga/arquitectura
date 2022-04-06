@@ -2,6 +2,7 @@ from atexit import register
 import opcode
 from pickletools import opcodes
 import struct
+import time
 
 class Register:
     class Wrapper: 
@@ -82,9 +83,9 @@ class cpu:
         'JMP' : 0xa,
         'JZ'  : 0xb,
         'JC'  : 0xc,
-        'JOF' : 0xd,
-        'JN'  : 0xe,
-        'BRK' : 0xf,
+        'JOF' : 0xd, # overflow
+        'JN'  : 0xe, # negative
+        'BRK' : 0xf, # Jump final
         'HLT' : 0x10,
         'AND' : 0x11,
         'OR'  : 0x12,
@@ -135,7 +136,7 @@ class cpu:
 # Registro de entrada y de dirección de memoria (input and MAR, input and memory address register).
 # Registro de instrucción (IR, instruction register).
 
-proConter = Register()
+programConter = Register()
 registerMar = Register()
 registerIR = Register()
 
@@ -144,6 +145,7 @@ registerStatus = Register()
 registerA = Register()
 registerB = Register()
 
+hlt = False
 # Memorias
 # Memoria de acceso aleatorio (RAM, random-access memory)
 #tam 16×8 (16 posiciones de 8 bits cada una)
