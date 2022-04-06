@@ -330,8 +330,8 @@ class Ui(QtWidgets.QMainWindow):
 
     ## reloj si es debug o correr el programa con un reloj
     def reloj(self,numBotton, lines):
-        print("entre!!")
         if numBotton  == '0':
+            print("entre")
             for x in range(lines):
                 print(x)       
                 time.sleep(0.3)
@@ -339,8 +339,10 @@ class Ui(QtWidgets.QMainWindow):
         elif numBotton == '1':
             while btn_times_preseed <= lines:       
                 is_pressed=True
+                print("yay",is_pressed)
                 print(x)
                 is_pressed=False
+                print("vea pues",is_pressed)
         else:
             return "NA"
 
