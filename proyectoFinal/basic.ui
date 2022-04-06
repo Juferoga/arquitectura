@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>PROCESADOR</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="lbl_1">
@@ -56,17 +56,18 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>370</y>
+      <y>380</y>
       <width>121</width>
       <height>131</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Noto Sans</family>
-      <pointsize>34</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
+      <family>Digital-7</family>
+      <pointsize>78</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
      </font>
     </property>
     <property name="text">
@@ -86,7 +87,7 @@
      <string>Display  7 segmentos</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btn_reset">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -104,7 +105,7 @@
      <string>Reset</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="btn_play">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -126,7 +127,7 @@
      <string>►</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="btn_load">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -144,7 +145,7 @@
      <string>Carga</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="btn_debug">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -430,7 +431,7 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QTextEdit" name="txtUrl">
+   <widget class="QTextEdit" name="txt_url">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -438,6 +439,12 @@
       <width>141</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="acceptRichText">
+     <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>Url del archivo</string>
     </property>
    </widget>
   </widget>
