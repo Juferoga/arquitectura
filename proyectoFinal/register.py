@@ -5,8 +5,6 @@ from pickletools import opcodes
 from posixpath import split
 import struct
 import time
-import pyautogui as pg
-import os
 
 
 class Register:
@@ -123,83 +121,99 @@ hlt = False
 MemoryRam = Memory = []
 
 
-    def instrucion(opcode, register):
-        stack = [] 
-        if opcode == '0':
-            print('No operación')
-        elif opcode == '1':
-            print('Mueve')
-        elif opcode == '2':
-            print('Incrementa B')
-            return registerB+1 
-        elif opcode == '3':
-            print('Incrementa A')
-            return registerA+1 
-        elif opcode == '4':
-            print('Suma')
-            return registerB+registerA
-        elif opcode == '5':
-            print('suma + incremento')
-            return registerB+registerA+1
-        elif opcode == '6':
-            print('Substracción')
-            return registerB-registerA
-        elif opcode == '7':
-            print('Operación lógica NO')
-            def inversa(a):
-                if a == 0:
-                    return 1
-                else:
-                    return 0
-            registertemp = str(registerB)
-            mapObject = map(int,registertemp)
-            separate = list(mapObject)
-            registerB = map(inversa,separate)
-            return registerB 
-        elif opcode == '8':
-            print('PUSH')
-            stack.append(register)
-        elif opcode == '9':
-            print('POP')
-            try:
-                return stack.pop()
-            except IndexError:
-                raise ValueError("La pila está vacía")
-        elif opcode == '10':
-            print('JUMP')
-            return #registerA+1 // binario
-        elif opcode == '11':
-            print('JUMP ZERO')
-            return #registerB suma posicion
-        elif opcode == '12':
-            print('JUMP CARRIE')
-        elif opcode == '13':
-            print('JUMP OVER FLOW')
-            
-        elif opcode == '14':
-            print('JUMP N')
-            
-        elif opcode == '15':
-            print('BREAK')
-            #break
-        elif opcode == '16':
-            print('HALT')
-            
-        elif opcode == '17':
-            print('AND')
-            
-        elif opcode == '18':
-            print('OR')
-            
-        elif opcode == '19':
-            print('XOR')
-            
-        elif opcode == '20':
-            print('CLEAR')
-            MemoryRam.clear()
-        else:
-            print("opcode no inscrito")
+def instrucion(opcode, register):
+    stack = [] 
+    if opcode == '0':
+        print('No operación')
+    elif opcode == '1':
+        print('Mueve')
+    elif opcode == '2':
+        print('Incrementa B')
+        return registerB+1 
+    elif opcode == '3':
+        print('Incrementa A')
+        return registerA+1 
+    elif opcode == '4':
+        print('Suma')
+        return registerB+registerA
+    elif opcode == '5':
+        print('suma + incremento')
+        return registerB+registerA+1
+    elif opcode == '6':
+        print('Substracción')
+        return registerB-registerA
+    elif opcode == '7':
+        print('Operación lógica NO')
+        def inversa(a):
+            if a == 0:
+                return 1
+            else:
+                return 0
+        registertemp = str(registerB)
+        mapObject = map(int,registertemp)
+        separate = list(mapObject)
+        registerB = map(inversa,separate)
+        return registerB 
+    elif opcode == '8':
+        print('PUSH')
+        stack.append(register)
+    elif opcode == '9':
+        print('POP')
+        try:
+            return stack.pop()
+        except IndexError:
+            raise ValueError("La pila está vacía")
+    elif opcode == '10':
+        print('JUMP')
+        return #registerA+1 // binario
+    elif opcode == '11':
+        print('JUMP ZERO')
+        return #registerB suma posicion
+    elif opcode == '12':
+        print('JUMP CARRIE')
+    elif opcode == '13':
+        print('JUMP OVER FLOW')
         
+    elif opcode == '14':
+        print('JUMP N')
+        
+    elif opcode == '15':
+        print('BREAK')
+        
+    elif opcode == '16':
+        print('HALT')
+        #con intefaz grafica            
+    elif opcode == '17':
+        print('AND')
+        def logicAnd(a,b):
+            if a == b:
+                return 1
+            else:
+                return 0
+                    
+
+        registertempB = str(registerB)
+        registertempA = str(registerA)
+        mapObjectB = map(int,registertempB)
+        mapObjectA = map(int,registertempA)
+        separateB = list(mapObjectB)
+        separateA = list(mapObjectA)
+        
+        x = map(logicAnd,separateB,separateA)
+        return x 
+            
+    elif opcode == '18':
+        print('OR')
+        
+    elif opcode == '19':
+        print('XOR')
+        
+    elif opcode == '20':
+        print('CLEAR')
+        MemoryRam.clear()
+    else:
+        print("opcode no inscrito")
+    
 
 def verifica(numBotton, lines):
     
