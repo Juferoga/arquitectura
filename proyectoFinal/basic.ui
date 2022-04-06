@@ -447,6 +447,24 @@
      <string>Url del archivo</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btn_test">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>260</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu Mono</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Carga</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
