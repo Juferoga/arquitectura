@@ -72,6 +72,40 @@ class Memory:
     def __len__ (self):
         return len(self.byte)
 
+if __name__ == "__main__":
+    # 1000 bytes memory
+    memory = Memory(1000) 
+ 
+    # 16x 128 bits SSE registers
+    xmm = []
+    for i in range(16):
+        xmm.append(Register())
+ 
+    #test register aliasing    
+    xmm[0].unsigned32[:] = (4, 5, 6, 7) # fill the whole register (4 x 32 bits)
+    temp = xmm[0].float64[:] # copy as float64 (2 x 64 bits)
+    xmm[0].float64[:] = temp # write back
+    print("xmm[0]:", xmm[0].unsigned32) # (4, 5, 6, 7)
+ 
+    # memory aliasing
+    memory.unsigned32[100] = 0x882233FF
+    
+    for i in range(103, 99, -1): #Little endian !
+        print(hex(memory.byte[i]), end=" ")
+    else:
+        print()
+ 
+    # register to register
+    xmm[1].unsigned32[:] = xmm[0].unsigned32[:]
+    xmm[1].float64[0] = xmm[0].float32[3]
+ 
+    # mem to register
+    xmm[0].unsigned32[0] = memory.unsigned32[100]
+    print(hex(xmm[0].unsigned32[0])) # 0x882233FF
+
+
+
+
 class cpu:
     # Dic opCode
     #hexadecimal
@@ -121,6 +155,7 @@ hlt = False
 # Memoria de acceso aleatorio (RAM, random-access memory)
 #tam 16×8 (16 posiciones de 8 bits cada una)
 
+
 MemoryRam = Memory = []
 lineCont = 0
 
@@ -142,6 +177,7 @@ class Ui(QtWidgets.QMainWindow):
         
         color="gray"
         self.lbl_status.setText("<font color="+color+">■</font>")
+
 
         #self.btn_test.clicked.connect()
 
