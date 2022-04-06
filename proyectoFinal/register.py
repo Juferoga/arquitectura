@@ -5,7 +5,6 @@ from pickletools import opcodes
 from posixpath import split
 import struct
 import time
-from typing_extensions import LiteralString
 from PyQt5 import QtWidgets, uic
 import sys
 
@@ -103,9 +102,6 @@ if __name__ == "__main__":
     xmm[0].unsigned32[0] = memory.unsigned32[100]
     print(hex(xmm[0].unsigned32[0])) # 0x882233FF
 
-
-
-
 class cpu:
     # Dic opCode
     #hexadecimal
@@ -190,14 +186,6 @@ class Ui(QtWidgets.QMainWindow):
         registerA=0x0
         registerB=0x0
     
-    def startCPU(self):
-        reloj(1,len(cont))
-    
-    def startDebug(self):
-        if is_pressed == False:
-            reloj(2,len(cont))
-        else:
-            btn_times_preseed = btn_times_preseed+1
     
     def uploadFile(self):
         try:
@@ -220,16 +208,17 @@ class Ui(QtWidgets.QMainWindow):
             print('Mueve')
             temp
             if param1 == 'A' or param1 == 'B':
-                registerA == registerB
+                registerA = registerB
             else: 
-                if param2 == registerA:
-                    temp = param2  
-                    registerB = 
+                registerB = registerA
+                # if param2 == registerA:
+                #     temp = param2  
+                #     registerB = 
                     
-                else:
-                    con_par = convertir  
-                    registerB = con_par
-                pass
+                # else:
+                #     con_par = convertir  
+                #     registerB = con_par
+
         elif opcode == '2':
             print('Incrementa B')
             return registerB+1 
@@ -339,10 +328,9 @@ class Ui(QtWidgets.QMainWindow):
         lineCont = param1
         print(lineCont)
 
-
     ## reloj si es debug o correr el programa con un reloj
-    def reloj(numBotton, lines):
-        
+    def reloj(self,numBotton, lines):
+        print("entre!!")
         if numBotton  == '0':
             for x in range(lines):
                 print(x)       
@@ -355,6 +343,16 @@ class Ui(QtWidgets.QMainWindow):
                 is_pressed=False
         else:
             return "NA"
+
+    def startCPU(self):
+        self.reloj(1,len(cont))
+    
+    def startDebug(self):
+        print(is_pressed)
+        if is_pressed == False:
+            self.reloj(2,len(cont))
+        else:
+            btn_times_preseed = btn_times_preseed+1
     
     def prueba():
         # 1000 bytes memory
@@ -392,3 +390,5 @@ def vista() :
     app = QtWidgets.QApplication(sys.argv)
     window = Ui()
     app.exec_()
+
+vista()
